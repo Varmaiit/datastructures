@@ -1,6 +1,7 @@
 ### Selection sort algorithm sorts an array by repetedly finding the minumum element from unsorted array.
 # Ref : https://www.geeksforgeeks.org/selection-sort/
 
+import copy
 
 
 def selection_sort(a):
@@ -34,7 +35,43 @@ def bubbleSort(arr):
     return arr
 
 
+def recursive_bubble_sort(listt): 
+    for i, num in enumerate(listt):
+        try: 
+            if listt[i+1] < num: 
+                listt[i] = listt[i+1] 
+                listt[i+1] = num 
+                # print("listt", listt)
+                recursive_bubble_sort(listt)
+        except IndexError: 
+            pass
+    return listt 
+
+
+# Function to do insertion sort 
+def insertionSort(arr): 
+  
+    # Traverse through 1 to len(arr) 
+    for i in range(1, len(arr)): 
+  
+        key = arr[i] 
+  
+        # Move elements of arr[0..i-1], that are 
+        # greater than key, to one position ahead 
+        # of their current position 
+        j = i-1
+        while j >= 0 and key < arr[j] : 
+                arr[j + 1] = arr[j] 
+                j -= 1
+        arr[j + 1] = key 
+
+
 if __name__ == "__main__":
-    arr = [3, 4, 1, 79, 6, 6, 9, 45, 78]
-    print("sorted array", selection_sort(arr), bubbleSort(arr))
+    _list = [3, 4, 1, 79, 6, 6, 9, 45, 78]
+    print("array inititally", _list)
+    z = selection_sort(copy.deepcopy(_list))
+    print("slection sort", z)
+    print("array inititally", _list)
+    print("bubble sort", bubbleSort(copy.deepcopy(_list)))
+    print("recursive bubble sort", recursive_bubble_sort(_list))
 
